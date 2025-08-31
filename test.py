@@ -1,0 +1,23 @@
+import sys, os, subprocess
+
+paks = ["openvdb", "tbb"]
+
+
+def main():
+    print(">>> args", *sys.argv[1:])
+
+    if len(sys.argv) > 1:
+        root = sys.argv[1]
+        exe = os.path.abspath(f"{root}/vcpkg.exe")
+        if os.path.exists(exe):
+            print(f">>> find {exe} ...")
+            for p in paks:
+                subprocess.run([exe, "install", p], shell=False)
+            pass
+        else:
+            raise RuntimeError(f">>> {exe} not find...")
+    else:
+        raise RuntimeError(">>> args error...")
+
+
+main()

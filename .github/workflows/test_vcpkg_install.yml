@@ -10,15 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true          # 拉取 vcpkg 子模块
+          submodules: true          
 
-      - name: Cache vcpkg binary cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ env.VCPKG_ROOT }}/installed
-            ${{ env.VCPKG_ROOT }}/buildtrees
-          key: vcpkg-${{ hashFiles('vcpkg.json') }}
+      - name: Test Python
+        run: |
+          python test.py `${{ env.VCPKG_ROOT }}`
 
       - name: Setup MSVC
         uses: ilammy/msvc-dev-cmd@v1
+
