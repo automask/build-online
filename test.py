@@ -13,9 +13,8 @@ def main():
             print(f">>> find {exe} ...")
             for p in paks:
                 subprocess.run([exe, "install", p], shell=False)
-            pass
         else:
-            raise RuntimeError(f">>> {exe} not find...")
+            raise RuntimeError(f">>> vcpkg.exe not find...")
     else:
         raise RuntimeError(">>> args error...")
 
