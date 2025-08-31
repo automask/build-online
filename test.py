@@ -9,8 +9,12 @@ def main2():
     if len(sys.argv) > 1:
         root = sys.argv[1]
         exe = os.path.abspath(f"{root}/vcpkg.exe")
+        bootstrap = os.path.abspath(f"{root}/bootstrap-vcpkg.bat")
+        subprocess.run(bootstrap)  # install vcpkg.exe
+
         if os.path.exists(exe):
             print(f">>> find {exe} ...")
+
             for p in paks:
                 subprocess.run([exe, "install", p], shell=False)
         else:

@@ -22,6 +22,11 @@ on:
 on: workflow_dispatch 
 ```
 
+### vcpkg
+- git submodule add https://github.com/microsoft/vcpkg.git vcpkg
+- git submodule update --init --recursive
+
+
 ### OpenVDB
 ```json
 {
