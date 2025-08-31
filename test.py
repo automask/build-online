@@ -3,7 +3,7 @@ import sys, os, subprocess
 paks = ["openvdb", "tbb"]
 
 
-def main():
+def main2():
     print(">>> args", *sys.argv[1:])
 
     if len(sys.argv) > 1:
@@ -15,6 +15,18 @@ def main():
                 subprocess.run([exe, "install", p], shell=False)
         else:
             raise RuntimeError(f">>> vcpkg.exe not find...")
+    else:
+        raise RuntimeError(">>> args error...")
+
+
+def main():
+    print(">>> args", *sys.argv[1:])
+
+    if len(sys.argv) > 1:
+        root = sys.argv[1]
+        files = os.listdir(root)
+        for f in files:
+            print(f)
     else:
         raise RuntimeError(">>> args error...")
 
