@@ -1,9 +1,15 @@
-name: Build Windows Release
+name: CMake Build Windows
 
 on:
   push:
     tags:
       - "v*"
+
+permissions:
+  contents: write       # 允许上传 Release
+  # 如果还要上传 artifact，可加：
+  # actions: read
+  # checks: write
 
 jobs:
   build:
@@ -30,8 +36,9 @@ jobs:
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
         with:
-        #   files: build/app_hello-*-win64.zip
-          files: build/app_hello.exe
+          files: |
+            build/app_hello-*-win64.zip
+            build/app_hello.exe
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: "Auto-built Windows binary"
