@@ -4,3 +4,7 @@ __pycache__
 .idea/
 cmake-build-*/
 build/
+vcpkg/
+vcpkg_installed/
+config.bat
+node_modules
