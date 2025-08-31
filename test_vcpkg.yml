@@ -1,0 +1,32 @@
+name: Windows CI (vcpkg + Ninja)
+
+# on: [push, pull_request]
+on: workflow_dispatch # 手动触发
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true          # 拉取 vcpkg 子模块
+
+      - name: Cache vcpkg binary cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.VCPKG_ROOT }}/installed
+            ${{ env.VCPKG_ROOT }}/buildtrees
+          key: vcpkg-${{ hashFiles('vcpkg.json') }}
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Configure & Build
+        run: |
+          cmake -B build -G Ninja `
+                -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake `
+                -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release

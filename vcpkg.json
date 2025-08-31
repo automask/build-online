@@ -1,0 +1,8 @@
+{
+  "name": "app_vdb",
+  "version": "1.0.0",
+  "dependencies": [
+    "openvdb",
+    "tbb"
+  ]
+}
